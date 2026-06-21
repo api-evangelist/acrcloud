@@ -1,0 +1,85 @@
+aid: acrcloud
+name: ACRCloud
+review:
+  question: Does ACRCloud expose a documented public WebSocket API?
+  answer: false
+  date: '2026-06-21'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was created. ACRCloud's documented surfaces are
+    request/response REST plus outbound HTTP result/state callbacks
+    (webhooks) for broadcast monitoring and file scanning. No streaming
+    transport (WebSocket or HTTP Server-Sent Events) is documented for the
+    public APIs, so there is no in-scope event-driven surface to model.
+findings:
+  summary: |
+    ACRCloud does not publish a documented public WebSocket API. The
+    Identification API is a single HMAC-SHA1 signed REST endpoint
+    (POST /v1/identify on identify-{region}.acrcloud.com). The Console API
+    (api-v2.acrcloud.com) and external Metadata API are bearer-token REST
+    APIs for managing buckets, audio files, file-scanning containers, and
+    broadcast-monitoring projects. Realtime broadcast-monitoring results are
+    delivered to the client via outbound HTTP result/state callbacks
+    (webhooks), not via a WebSocket connection the client opens. No ws:// or
+    wss:// endpoint is documented for any product.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://identify-eu-west-1.acrcloud.com/v1
+      documented: true
+    - protocol: REST
+      scheme: https
+      baseURL: https://api-v2.acrcloud.com/api
+      documented: true
+    - protocol: Webhook
+      scheme: https
+      note: Outbound HTTP result-callback and state-notification callbacks for broadcast-monitoring/file-scanning results. Server-to-client HTTP POST, not WebSocket.
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in the Identification API, Console API, Metadata API, or broadcast-monitoring docs as of the review date.
+  endpointsConfirmedRest:
+    - POST https://identify-eu-west-1.acrcloud.com/v1/identify
+    - GET  https://api-v2.acrcloud.com/api/buckets
+    - POST https://api-v2.acrcloud.com/api/buckets
+    - GET  https://api-v2.acrcloud.com/api/buckets/{id}
+    - PUT  https://api-v2.acrcloud.com/api/buckets/{id}
+    - DELETE https://api-v2.acrcloud.com/api/buckets/{id}
+    - GET  https://api-v2.acrcloud.com/api/buckets/{bucket_id}/files
+    - POST https://api-v2.acrcloud.com/api/buckets/{bucket_id}/files
+    - GET  https://api-v2.acrcloud.com/api/buckets/{bucket_id}/files/{ids}
+    - DELETE https://api-v2.acrcloud.com/api/buckets/{bucket_id}/files/{ids}
+    - GET  https://api-v2.acrcloud.com/api/fs-containers
+    - POST https://api-v2.acrcloud.com/api/fs-containers
+    - GET  https://api-v2.acrcloud.com/api/fs-containers/{container_id}
+    - PUT  https://api-v2.acrcloud.com/api/fs-containers/{container_id}
+    - DELETE https://api-v2.acrcloud.com/api/fs-containers/{container_id}
+    - GET  https://api-v2.acrcloud.com/api/bm-bd-projects
+    - POST https://api-v2.acrcloud.com/api/bm-bd-projects
+    - PUT  https://api-v2.acrcloud.com/api/bm-bd-projects/{id}
+    - DELETE https://api-v2.acrcloud.com/api/bm-bd-projects/{id}
+    - POST https://api-v2.acrcloud.com/api/bm-bd-projects/{id}/result-callback
+    - GET  https://eu-api-v2.acrcloud.com/api/external-metadata/tracks
+sources:
+  - url: https://docs.acrcloud.com/reference/identification-api
+    type: Documentation
+    note: Identification API is a single HMAC-signed REST POST to /v1/identify; no WebSocket.
+  - url: https://docs.acrcloud.com/reference/console-api
+    type: APIReference
+    note: Console API endpoints are all bearer-token HTTPS REST.
+  - url: https://docs.acrcloud.com/reference/console-api/bm-projects/broadcast-database-projects
+    type: Documentation
+    note: Realtime broadcast-monitoring results delivered via outbound HTTP result/state callbacks, not WebSocket.
+  - url: https://docs.acrcloud.com/reference/metadata-api
+    type: Documentation
+    note: Metadata lookups are REST GET requests with bearer auth.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket or SSE streaming surface exists. Realtime delivery is via
+    outbound HTTP webhooks (result-callback / state-notification), which are
+    modeled as REST callback operations rather than an AsyncAPI streaming
+    document. No AsyncAPI artifact was created.

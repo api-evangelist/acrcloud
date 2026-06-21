@@ -1,0 +1,68 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: ACRCloud
+providerId: acrcloud
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- Audio
+- Music Recognition
+- Audio Fingerprinting
+- Broadcast Monitoring
+- Metadata
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  ACRCloud meters the Identification API per recognition request and applies
+  per-project concurrency limits tied to the plan provisioned for each access
+  key. The Console and Metadata APIs are bearer-token administrative APIs with
+  their own per-account request limits. Specific per-plan request-per-second and
+  monthly recognition quotas are configured per project and are not reconciled in
+  this artifact.
+notes: >-
+  Verify per-project concurrency, recognition quotas, and Console/Metadata API
+  request limits in the ACRCloud console and account agreement on reconciliation;
+  values vary by plan and product.
+sources:
+- https://docs.acrcloud.com/reference/identification-api
+- https://docs.acrcloud.com/reference/console-api
+- https://www.acrcloud.com/pricing/
+responseCodes:
+  throttled: 429
+limits:
+- name: Identification Concurrency
+  scope: project
+  metric: concurrent_requests
+  limit: see provider documentation
+  notes: Concurrent recognition requests per project/access key, provisioned by plan.
+- name: Recognition Quota
+  scope: project
+  metric: requests
+  limit: see provider documentation
+  notes: Monthly recognition allowance, varies by plan and product.
+- name: Sample Size
+  scope: request
+  metric: bytes
+  limit: 5MB
+  notes: Identification API sample/fingerprint payload must be under 5MB; samples under 15s are recommended.
+- name: Console API Requests
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: Per-account request limits on the bearer-token Console API.
+- name: Metadata Platforms Per Request
+  scope: request
+  metric: platforms
+  limit: 5
+  notes: External Metadata API allows a maximum of 5 platforms per request.
+policies:
+- name: Per-Plan Provisioning
+  description: Concurrency and recognition quotas scale with the plan provisioned for each project/access key.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter on 429 responses and honor Retry-After where present.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

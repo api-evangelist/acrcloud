@@ -1,0 +1,179 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ACRCloud API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Identification",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Identify a sample",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://identify-eu-west-1.acrcloud.com/v1/identify",
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Recognize music or custom audio from an audio sample or fingerprint using an HMAC-SHA1 signed request."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Buckets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List buckets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.acrcloud.com/api/buckets"
+          },
+          "docs": "List buckets."
+        },
+        {
+          "info": {
+            "name": "Create a bucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-v2.acrcloud.com/api/buckets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a bucket."
+        },
+        {
+          "info": {
+            "name": "Upload an audio file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-v2.acrcloud.com/api/buckets/{bucket_id}/files",
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Upload an audio file or fingerprint to a bucket."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "File Scanning",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a file-scanning container",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-v2.acrcloud.com/api/fs-containers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a file-scanning container that detects content from configured buckets."
+        },
+        {
+          "info": {
+            "name": "List file-scanning containers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-v2.acrcloud.com/api/fs-containers"
+          },
+          "docs": "List file-scanning containers."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Broadcast Monitoring",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a broadcast project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-v2.acrcloud.com/api/bm-bd-projects",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a broadcast-database monitoring project."
+        },
+        {
+          "info": {
+            "name": "Set result callback",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-v2.acrcloud.com/api/bm-bd-projects/{id}/result-callback",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set the results callback URL for a broadcast-monitoring project."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get track metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://eu-api-v2.acrcloud.com/api/external-metadata/tracks"
+          },
+          "docs": "Look up enriched third-party music metadata by ISRC, ACR ID, source URL, or query."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

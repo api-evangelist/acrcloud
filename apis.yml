@@ -1,0 +1,129 @@
+aid: acrcloud
+url: https://raw.githubusercontent.com/api-evangelist/acrcloud/refs/heads/main/apis.yml
+name: ACRCloud
+kind: company
+description: ACRCloud provides automatic content recognition (ACR) APIs for music
+  and audio. The HMAC-signed Identification API recognizes music, custom audio, live
+  channels, and humming from short audio samples or fingerprints, while the
+  bearer-token Console and Metadata APIs manage buckets, file-scanning containers,
+  broadcast-monitoring projects, and rich third-party music metadata.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Audio
+- Music Recognition
+- Audio Fingerprinting
+- Broadcast Monitoring
+- Metadata
+created: '2026-06-21'
+modified: '2026-06-21'
+specificationVersion: '0.19'
+apis:
+- aid: acrcloud:identification
+  name: ACRCloud Identification API
+  tags:
+  - Identification
+  - Music Recognition
+  - Audio Fingerprinting
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.acrcloud.com/reference/identification-api
+  baseURL: https://identify-eu-west-1.acrcloud.com/v1
+  properties:
+  - url: https://docs.acrcloud.com/reference/identification-api
+    type: Documentation
+  - url: https://docs.acrcloud.com/reference/identification-api/identification-api
+    type: APIReference
+  - url: openapi/acrcloud-openapi.yml
+    type: OpenAPI
+  description: HMAC-SHA1 signed recognition endpoint that identifies music, custom
+    audio, live channels, humming, and music/speech segments from a short audio
+    sample or a precomputed fingerprint, returning matched track metadata.
+- aid: acrcloud:file-scanning
+  name: ACRCloud File Scanning API
+  tags:
+  - File Scanning
+  - Content Detection
+  - Buckets
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.acrcloud.com/reference/console-api/file-scanning
+  baseURL: https://api-v2.acrcloud.com/api
+  properties:
+  - url: https://docs.acrcloud.com/reference/console-api/file-scanning
+    type: Documentation
+  - url: openapi/acrcloud-openapi.yml
+    type: OpenAPI
+  description: Bearer-token managed file-scanning containers that detect recognized
+    content from configured buckets across whole files, supporting both clean
+    line-in audio and recorded/noisy audio.
+- aid: acrcloud:broadcast-monitoring
+  name: ACRCloud Broadcast Monitoring API
+  tags:
+  - Broadcast Monitoring
+  - Channels
+  - Realtime
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.acrcloud.com/reference/console-api/bm-projects/broadcast-database-projects
+  baseURL: https://api-v2.acrcloud.com/api
+  properties:
+  - url: https://docs.acrcloud.com/reference/console-api/bm-projects/broadcast-database-projects
+    type: Documentation
+  - url: openapi/acrcloud-openapi.yml
+    type: OpenAPI
+  description: Broadcast-monitoring projects that continuously identify content
+    across radio, TV, and custom streams, with channel management and realtime or
+    delayed result callbacks.
+- aid: acrcloud:buckets-metadata
+  name: ACRCloud Buckets & Metadata API
+  tags:
+  - Buckets
+  - Audio Files
+  - Metadata
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.acrcloud.com/reference/console-api/buckets
+  baseURL: https://api-v2.acrcloud.com/api
+  properties:
+  - url: https://docs.acrcloud.com/reference/console-api/buckets
+    type: Documentation
+  - url: https://docs.acrcloud.com/reference/metadata-api
+    type: APIReference
+  - url: openapi/acrcloud-openapi.yml
+    type: OpenAPI
+  description: Manage custom recognition buckets, upload and manage audio files and
+    fingerprints, and enrich tracks via the external Metadata API by ISRC, ACRID,
+    source URL, or free-text query across Spotify, Deezer, YouTube, and Apple Music.
+- aid: acrcloud:console
+  name: ACRCloud Console API
+  tags:
+  - Console
+  - Projects
+  - Access Tokens
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.acrcloud.com/reference/console-api
+  baseURL: https://api-v2.acrcloud.com/api
+  properties:
+  - url: https://docs.acrcloud.com/reference/console-api
+    type: Documentation
+  - url: https://docs.acrcloud.com/reference/console-api/accesstoken
+    type: APIReference
+  - url: openapi/acrcloud-openapi.yml
+    type: OpenAPI
+  description: Bearer-token administrative API for managing projects, base/UCF
+    projects, access keys, and the developer access tokens used to authenticate the
+    Console, file-scanning, and broadcast-monitoring resources.
+common:
+- type: GitHubOrganization
+  url: https://github.com/acrcloud
+- type: LinkedIn
+  url: https://www.linkedin.com/company/acrcloud
+- type: Website
+  url: https://www.acrcloud.com
+- type: Documentation
+  url: https://docs.acrcloud.com
+- type: Plans
+  url: plans/acrcloud-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/acrcloud-rate-limits.yml
+- type: FinOps
+  url: finops/acrcloud-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

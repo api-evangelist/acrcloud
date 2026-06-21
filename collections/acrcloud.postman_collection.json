@@ -1,0 +1,307 @@
+{
+  "item": [
+    {
+      "id": "f1a2b3c4-0001-0001-0001-000000000001",
+      "name": "Identification",
+      "description": {
+        "content": "Recognize music or custom audio from a sample or fingerprint.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f1a2b3c4-0001-0001-0001-000000000002",
+          "name": "Identify a sample",
+          "request": {
+            "name": "Identify a sample",
+            "description": {
+              "content": "POST an audio sample or fingerprint with an HMAC-SHA1 signature to identify music or custom audio.",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "https://identify-eu-west-1.acrcloud.com/v1/identify",
+              "protocol": "https",
+              "host": ["identify-eu-west-1", "acrcloud", "com"],
+              "path": ["v1", "identify"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "sample", "type": "file", "src": [] },
+                { "key": "sample_bytes", "type": "text", "value": "<integer>" },
+                { "key": "access_key", "type": "text", "value": "{{accessKey}}" },
+                { "key": "data_type", "type": "text", "value": "audio" },
+                { "key": "signature_version", "type": "text", "value": "1" },
+                { "key": "signature", "type": "text", "value": "{{signature}}" },
+                { "key": "timestamp", "type": "text", "value": "{{timestamp}}" }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "f1a2b3c4-0002-0002-0002-000000000001",
+      "name": "Buckets",
+      "description": {
+        "content": "Manage custom recognition buckets and the audio files within them.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f1a2b3c4-0002-0002-0002-000000000002",
+          "name": "List buckets",
+          "request": {
+            "name": "List buckets",
+            "description": {},
+            "url": {
+              "raw": "{{baseUrl}}/api/buckets",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "buckets"],
+              "query": [],
+              "variable": []
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null,
+            "body": {}
+          },
+          "response": []
+        },
+        {
+          "id": "f1a2b3c4-0002-0002-0002-000000000003",
+          "name": "Create a bucket",
+          "request": {
+            "name": "Create a bucket",
+            "description": {},
+            "url": {
+              "raw": "{{baseUrl}}/api/buckets",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "buckets"],
+              "query": [],
+              "variable": []
+            },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"region\": \"eu-west-1\",\n  \"type\": \"<string>\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "f1a2b3c4-0002-0002-0002-000000000004",
+          "name": "Upload an audio file",
+          "request": {
+            "name": "Upload an audio file",
+            "description": {
+              "content": "Upload an audio file or fingerprint to a bucket.",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/buckets/:bucket_id/files",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "buckets", ":bucket_id", "files"],
+              "query": [],
+              "variable": [{ "key": "bucket_id", "value": "<string>" }]
+            },
+            "header": [{ "key": "Content-Type", "value": "multipart/form-data" }],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "file", "type": "file", "src": [] },
+                { "key": "title", "type": "text", "value": "<string>" },
+                { "key": "data_type", "type": "text", "value": "audio" }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "f1a2b3c4-0003-0003-0003-000000000001",
+      "name": "File Scanning",
+      "description": {
+        "content": "Manage file-scanning containers that detect content from buckets.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f1a2b3c4-0003-0003-0003-000000000002",
+          "name": "Create a file-scanning container",
+          "request": {
+            "name": "Create a file-scanning container",
+            "description": {},
+            "url": {
+              "raw": "{{baseUrl}}/api/fs-containers",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "fs-containers"],
+              "query": [],
+              "variable": []
+            },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"region\": \"eu-west-1\",\n  \"buckets\": [\"<string>\"]\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "f1a2b3c4-0003-0003-0003-000000000003",
+          "name": "List file-scanning containers",
+          "request": {
+            "name": "List file-scanning containers",
+            "description": {},
+            "url": {
+              "raw": "{{baseUrl}}/api/fs-containers",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "fs-containers"],
+              "query": [],
+              "variable": []
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null,
+            "body": {}
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "f1a2b3c4-0004-0004-0004-000000000001",
+      "name": "Broadcast Monitoring",
+      "description": {
+        "content": "Manage broadcast-database monitoring projects and result callbacks.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f1a2b3c4-0004-0004-0004-000000000002",
+          "name": "Create a broadcast project",
+          "request": {
+            "name": "Create a broadcast project",
+            "description": {},
+            "url": {
+              "raw": "{{baseUrl}}/api/bm-bd-projects",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "bm-bd-projects"],
+              "query": [],
+              "variable": []
+            },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"region\": \"eu-west-1\",\n  \"buckets\": [\"<string>\"]\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "f1a2b3c4-0004-0004-0004-000000000003",
+          "name": "Set result callback",
+          "request": {
+            "name": "Set result callback",
+            "description": {},
+            "url": {
+              "raw": "{{baseUrl}}/api/bm-bd-projects/:id/result-callback",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "bm-bd-projects", ":id", "result-callback"],
+              "query": [],
+              "variable": [{ "key": "id", "value": "<string>" }]
+            },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"result_callback_url\": \"<string>\",\n  \"result_callback_result_type\": 0\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "f1a2b3c4-0005-0005-0005-000000000001",
+      "name": "Metadata",
+      "description": {
+        "content": "Look up enriched third-party music metadata.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f1a2b3c4-0005-0005-0005-000000000002",
+          "name": "Get track metadata",
+          "request": {
+            "name": "Get track metadata",
+            "description": {},
+            "url": {
+              "raw": "https://eu-api-v2.acrcloud.com/api/external-metadata/tracks?isrc=<string>",
+              "protocol": "https",
+              "host": ["eu-api-v2", "acrcloud", "com"],
+              "path": ["api", "external-metadata", "tracks"],
+              "query": [{ "key": "isrc", "value": "<string>" }],
+              "variable": []
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null,
+            "body": {}
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-v2.acrcloud.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a3c1f9e2-2026-0621-acrc-loudacrcloud01",
+    "name": "ACRCloud API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Specification of the ACRCloud automatic content recognition APIs. The Identification API uses HMAC-SHA1 request signing; the Console and Metadata APIs use bearer-token access tokens.\n\nContact Support:\n Name: ACRCloud Support\n Email: support@acrcloud.com",
+      "type": "text/plain"
+    }
+  }
+}

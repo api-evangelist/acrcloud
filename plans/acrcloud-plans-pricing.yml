@@ -1,0 +1,157 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: ACRCloud
+providerId: acrcloud
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- Audio
+- Music Recognition
+- Audio Fingerprinting
+- Broadcast Monitoring
+- Metadata
+- Plans
+description: >-
+  ACRCloud offers usage-based pricing across its content-recognition products.
+  New accounts start with a free trial, after which Music Recognition is
+  typically metered per recognition/request, Custom Audio Recognition and File
+  Scanning are metered per recognition or per scanned hour, and Broadcast
+  Monitoring is priced per monitored channel/stream per month. ACRCloud does not
+  publish a single fixed public price list; most tiers are quoted per use case.
+notes: >-
+  ACRCloud does not disclose a complete standardized public price table; specific
+  per-product dollar amounts beyond representative examples (e.g. Custom Stream
+  Monitoring around US$26/month) are quoted on request. Verify all amounts on the
+  pricing page and in the console during reconciliation.
+sources:
+- https://www.acrcloud.com/pricing/
+- https://docs.acrcloud.com
+plans:
+- id: acrcloud-free-trial
+  name: Free Trial
+  type: free
+  description: >-
+    Time- or volume-limited trial access to evaluate music and custom audio
+    recognition before committing to a paid plan.
+  entries:
+  - label: Trial Recognitions
+    name: trial_recognitions
+    type: free
+    metric: requests
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: free during trial
+    userMultiplied: false
+  elements:
+  - name: Music Recognition
+  - name: Custom Audio Recognition
+- id: acrcloud-music-recognition
+  name: Music Recognition
+  type: usage
+  description: >-
+    Identify recorded music from short audio samples or fingerprints via the
+    HMAC-signed Identification API, metered per recognition request.
+  entries:
+  - label: Recognition Requests
+    name: recognition_requests
+    type: usage
+    metric: requests
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1000
+    price: usage-based per recognition (see pricing page)
+    userMultiplied: false
+  elements:
+  - name: Identification API
+  - name: Metadata Enrichment
+- id: acrcloud-custom-audio-file-scanning
+  name: Custom Audio Recognition & File Scanning
+  type: usage
+  description: >-
+    Recognize custom audio against your own buckets, including whole-file
+    scanning through file-scanning containers, metered per recognition or per
+    scanned hour.
+  entries:
+  - label: Custom Recognitions
+    name: custom_recognitions
+    type: usage
+    metric: requests
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1000
+    price: usage-based per recognition (see pricing page)
+    userMultiplied: false
+  - label: File Scanning
+    name: file_scanning_hours
+    type: usage
+    metric: hours
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: usage-based per scanned hour (see pricing page)
+    userMultiplied: false
+  elements:
+  - name: Buckets
+  - name: File Scanning Containers
+- id: acrcloud-broadcast-monitoring
+  name: Broadcast Monitoring
+  type: subscription
+  description: >-
+    Continuous monitoring of radio, TV, and custom streams, priced per
+    monitored channel/stream per month.
+  entries:
+  - label: Custom Stream Monitoring
+    name: custom_stream
+    type: subscription
+    metric: channels
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: approx US$26 per stream per month (representative)
+    userMultiplied: false
+  - label: Broadcast Channel Monitoring
+    name: broadcast_channel
+    type: subscription
+    metric: channels
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: per monitored channel per month (see pricing page)
+    userMultiplied: false
+  elements:
+  - name: Broadcast Database Projects
+  - name: Custom Streams Projects
+  - name: Result Callbacks
+- id: acrcloud-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Volume commitments, dedicated/on-prem deployments, custom datasets, and
+    negotiated terms. Contact ACRCloud sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Custom Volume Pricing
+  - name: Dedicated Deployment
+  - name: Custom Datasets
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
