@@ -110,6 +110,10 @@ apis:
     projects, access keys, and the developer access tokens used to authenticate the
     Console, file-scanning, and broadcast-monitoring resources.
 common:
+- type: DomainSecurity
+  url: security/acrcloud-domain-security.yml
+- type: Authentication
+  url: authentication/acrcloud-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/acrcloud
 - type: LinkedIn
@@ -124,6 +128,8 @@ common:
   url: rate-limits/acrcloud-rate-limits.yml
 - type: FinOps
   url: finops/acrcloud-finops.yml
+- type: Blog
+  url: https://acrcloud.com/blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

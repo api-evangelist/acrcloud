@@ -1,0 +1,27 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/acrcloud-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - query
+schemes:
+- name: acrSignature
+  type: apiKey
+  in: query
+  parameter: signature
+  description: HMAC-SHA1 request signing for the Identification API. The client sends access_key,
+    timestamp, signature_version=1, data_type, and a Base64 signature. The signature is HMAC-SHA1
+    of the string "POST\n/v1/identify\n {access_key}\n{data_type}\n1\n{timestamp}" keyed with
+    the access_secret.
+  sources:
+  - openapi/acrcloud-openapi.yml
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: 'Console API access token created in the ACRCloud console developer settings
+    and sent as "Authorization: Bearer {token}".'
+  sources:
+  - openapi/acrcloud-openapi.yml
