@@ -110,6 +110,8 @@ apis:
     projects, access keys, and the developer access tokens used to authenticate the
     Console, file-scanning, and broadcast-monitoring resources.
 common:
+- type: AgenticAccess
+  url: agentic-access/acrcloud-agentic-access.yml
 - type: DomainSecurity
   url: security/acrcloud-domain-security.yml
 - type: Authentication
