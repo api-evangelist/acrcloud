@@ -1,0 +1,122 @@
+openapi: 3.0.1
+info:
+  title: ACRCloud Audio Files Metadata API
+  description: Specification of the ACRCloud automatic content recognition (ACR) APIs. The Identification API recognizes music, custom audio, live channels, and humming from a short audio sample or a precomputed fingerprint using HMAC-SHA1 signed requests. The Console API (api-v2.acrcloud.com) manages buckets, audio files, file-scanning containers, and broadcast-monitoring projects using bearer-token access tokens, and the external Metadata API enriches tracks with third-party music metadata.
+  termsOfService: https://www.acrcloud.com/terms/
+  contact:
+    name: ACRCloud Support
+    email: support@acrcloud.com
+    url: https://www.acrcloud.com
+  version: '1.0'
+servers:
+- url: https://identify-eu-west-1.acrcloud.com
+  description: Identification API (EU West region; other regions use identify-{region}.acrcloud.com)
+- url: https://api-v2.acrcloud.com
+  description: Console API and bucket/file/project management
+- url: https://eu-api-v2.acrcloud.com
+  description: External Metadata API (region-specific host)
+tags:
+- name: Metadata
+  description: Look up enriched third-party music metadata.
+paths:
+  /api/external-metadata/tracks:
+    get:
+      operationId: getExternalMetadataTracks
+      tags:
+      - Metadata
+      summary: Look up enriched track metadata.
+      description: Returns enriched music metadata for a track resolved by ISRC, ACR ID, source URL, or free-text query, including platform-specific external IDs and links across Spotify, Deezer, YouTube, and Apple Music.
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: isrc
+        in: query
+        schema:
+          type: string
+      - name: acr_id
+        in: query
+        schema:
+          type: string
+      - name: source_url
+        in: query
+        schema:
+          type: string
+      - name: query
+        in: query
+        schema:
+          type: string
+      - name: platforms
+        in: query
+        description: Comma-separated platforms (max 5). Default spotify,deezer,youtube,applemusic.
+        schema:
+          type: string
+      - name: include_works
+        in: query
+        schema:
+          type: integer
+      - name: format
+        in: query
+        schema:
+          type: string
+          enum:
+          - text
+          - json
+          default: text
+      responses:
+        '200':
+          description: Track metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataTrack'
+components:
+  schemas:
+    MetadataTrack:
+      type: object
+      properties:
+        name:
+          type: string
+        isrc:
+          type: string
+        duration_ms:
+          type: integer
+        release_date:
+          type: string
+        artists:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+        album:
+          type: object
+          properties:
+            name:
+              type: string
+            upc:
+              type: string
+            label:
+              type: string
+        genres:
+          type: array
+          items:
+            type: string
+        external_metadata:
+          type: object
+          description: Platform-specific IDs, links, and preview URLs.
+        works:
+          type: array
+          items:
+            type: object
+            description: Composition details and contributors (when include_works=1).
+  securitySchemes:
+    acrSignature:
+      type: apiKey
+      in: query
+      name: signature
+      description: HMAC-SHA1 request signing for the Identification API. The client sends access_key, timestamp, signature_version=1, data_type, and a Base64 signature. The signature is HMAC-SHA1 of the string "POST\n/v1/identify\n {access_key}\n{data_type}\n1\n{timestamp}" keyed with the access_secret.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Console API access token created in the ACRCloud console developer settings and sent as "Authorization: Bearer {token}".'

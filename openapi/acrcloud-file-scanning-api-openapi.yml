@@ -1,0 +1,174 @@
+openapi: 3.0.1
+info:
+  title: ACRCloud Audio Files File Scanning API
+  description: Specification of the ACRCloud automatic content recognition (ACR) APIs. The Identification API recognizes music, custom audio, live channels, and humming from a short audio sample or a precomputed fingerprint using HMAC-SHA1 signed requests. The Console API (api-v2.acrcloud.com) manages buckets, audio files, file-scanning containers, and broadcast-monitoring projects using bearer-token access tokens, and the external Metadata API enriches tracks with third-party music metadata.
+  termsOfService: https://www.acrcloud.com/terms/
+  contact:
+    name: ACRCloud Support
+    email: support@acrcloud.com
+    url: https://www.acrcloud.com
+  version: '1.0'
+servers:
+- url: https://identify-eu-west-1.acrcloud.com
+  description: Identification API (EU West region; other regions use identify-{region}.acrcloud.com)
+- url: https://api-v2.acrcloud.com
+  description: Console API and bucket/file/project management
+- url: https://eu-api-v2.acrcloud.com
+  description: External Metadata API (region-specific host)
+tags:
+- name: File Scanning
+  description: Manage file-scanning containers that detect content from buckets.
+paths:
+  /api/fs-containers:
+    get:
+      operationId: listFileScanningContainers
+      tags:
+      - File Scanning
+      summary: List file-scanning containers.
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: region
+        in: query
+        schema:
+          type: string
+      - name: name
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of file-scanning containers.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FsContainer'
+    post:
+      operationId: createFileScanningContainer
+      tags:
+      - File Scanning
+      summary: Create a file-scanning container.
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FsContainerCreate'
+      responses:
+        '201':
+          description: The created container.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FsContainer'
+  /api/fs-containers/{container_id}:
+    parameters:
+    - name: container_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: getFileScanningContainer
+      tags:
+      - File Scanning
+      summary: Retrieve a file-scanning container.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: The requested container.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FsContainer'
+    put:
+      operationId: updateFileScanningContainer
+      tags:
+      - File Scanning
+      summary: Update a file-scanning container.
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FsContainerCreate'
+      responses:
+        '200':
+          description: The updated container.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FsContainer'
+    delete:
+      operationId: deleteFileScanningContainer
+      tags:
+      - File Scanning
+      summary: Delete a file-scanning container.
+      security:
+      - bearerAuth: []
+      responses:
+        '204':
+          description: Container deleted.
+components:
+  schemas:
+    FsContainer:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        region:
+          type: string
+        audio_type:
+          type: string
+        state:
+          type: integer
+        created_at:
+          type: string
+    FsContainerCreate:
+      type: object
+      required:
+      - name
+      - region
+      - buckets
+      properties:
+        name:
+          type: string
+        region:
+          type: string
+        audio_type:
+          type: string
+          description: linein (clean) or recorded/noisy audio handling.
+        buckets:
+          type: array
+          items:
+            type: string
+        engine:
+          type: object
+        policy:
+          type: object
+        callback_url:
+          type: string
+          format: uri
+        music_detection:
+          type: integer
+        ai_detection:
+          type: integer
+  securitySchemes:
+    acrSignature:
+      type: apiKey
+      in: query
+      name: signature
+      description: HMAC-SHA1 request signing for the Identification API. The client sends access_key, timestamp, signature_version=1, data_type, and a Base64 signature. The signature is HMAC-SHA1 of the string "POST\n/v1/identify\n {access_key}\n{data_type}\n1\n{timestamp}" keyed with the access_secret.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Console API access token created in the ACRCloud console developer settings and sent as "Authorization: Bearer {token}".'

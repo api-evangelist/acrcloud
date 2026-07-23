@@ -1,0 +1,189 @@
+openapi: 3.0.1
+info:
+  title: ACRCloud Audio Files API
+  description: Specification of the ACRCloud automatic content recognition (ACR) APIs. The Identification API recognizes music, custom audio, live channels, and humming from a short audio sample or a precomputed fingerprint using HMAC-SHA1 signed requests. The Console API (api-v2.acrcloud.com) manages buckets, audio files, file-scanning containers, and broadcast-monitoring projects using bearer-token access tokens, and the external Metadata API enriches tracks with third-party music metadata.
+  termsOfService: https://www.acrcloud.com/terms/
+  contact:
+    name: ACRCloud Support
+    email: support@acrcloud.com
+    url: https://www.acrcloud.com
+  version: '1.0'
+servers:
+- url: https://identify-eu-west-1.acrcloud.com
+  description: Identification API (EU West region; other regions use identify-{region}.acrcloud.com)
+- url: https://api-v2.acrcloud.com
+  description: Console API and bucket/file/project management
+- url: https://eu-api-v2.acrcloud.com
+  description: External Metadata API (region-specific host)
+tags:
+- name: Audio Files
+  description: Upload and manage audio files and fingerprints within a bucket.
+paths:
+  /api/buckets/{bucket_id}/files:
+    parameters:
+    - name: bucket_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: listAudioFiles
+      tags:
+      - Audio Files
+      summary: List audio files in a bucket.
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: search
+        in: query
+        schema:
+          type: string
+      - name: state
+        in: query
+        schema:
+          type: integer
+      - name: page
+        in: query
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Paginated list of audio files.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudioFileList'
+    post:
+      operationId: uploadAudioFile
+      tags:
+      - Audio Files
+      summary: Upload an audio file or fingerprint to a bucket.
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AudioFileUpload'
+      responses:
+        '201':
+          description: The created audio file record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudioFile'
+  /api/buckets/{bucket_id}/files/{ids}:
+    parameters:
+    - name: bucket_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: ids
+      in: path
+      required: true
+      description: Comma-separated file IDs or ACR IDs.
+      schema:
+        type: string
+    get:
+      operationId: getAudioFiles
+      tags:
+      - Audio Files
+      summary: Retrieve one or more audio files by ID or ACR ID.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Matching audio file records.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudioFile'
+    delete:
+      operationId: deleteAudioFiles
+      tags:
+      - Audio Files
+      summary: Delete one or more audio files.
+      security:
+      - bearerAuth: []
+      responses:
+        '204':
+          description: Files deleted.
+components:
+  schemas:
+    AudioFile:
+      type: object
+      properties:
+        id:
+          type: string
+        acr_id:
+          type: string
+        bucket_id:
+          type: string
+        title:
+          type: string
+        state:
+          type: integer
+        duration:
+          type: number
+        user_defined:
+          type: object
+        created_at:
+          type: string
+        updated_at:
+          type: string
+    AudioFileUpload:
+      type: object
+      required:
+      - data_type
+      properties:
+        file:
+          type: string
+          format: binary
+        title:
+          type: string
+        data_type:
+          type: string
+          enum:
+          - audio
+          - fingerprint
+          - audio_url
+          - acrid
+        user_defined:
+          type: string
+          description: JSON-encoded user-defined metadata.
+    AudioFileList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudioFile'
+        meta:
+          $ref: '#/components/schemas/PageMeta'
+    PageMeta:
+      type: object
+      properties:
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total:
+          type: integer
+  securitySchemes:
+    acrSignature:
+      type: apiKey
+      in: query
+      name: signature
+      description: HMAC-SHA1 request signing for the Identification API. The client sends access_key, timestamp, signature_version=1, data_type, and a Base64 signature. The signature is HMAC-SHA1 of the string "POST\n/v1/identify\n {access_key}\n{data_type}\n1\n{timestamp}" keyed with the access_secret.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Console API access token created in the ACRCloud console developer settings and sent as "Authorization: Bearer {token}".'

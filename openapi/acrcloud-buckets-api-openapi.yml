@@ -1,0 +1,193 @@
+openapi: 3.0.1
+info:
+  title: ACRCloud Audio Files Buckets API
+  description: Specification of the ACRCloud automatic content recognition (ACR) APIs. The Identification API recognizes music, custom audio, live channels, and humming from a short audio sample or a precomputed fingerprint using HMAC-SHA1 signed requests. The Console API (api-v2.acrcloud.com) manages buckets, audio files, file-scanning containers, and broadcast-monitoring projects using bearer-token access tokens, and the external Metadata API enriches tracks with third-party music metadata.
+  termsOfService: https://www.acrcloud.com/terms/
+  contact:
+    name: ACRCloud Support
+    email: support@acrcloud.com
+    url: https://www.acrcloud.com
+  version: '1.0'
+servers:
+- url: https://identify-eu-west-1.acrcloud.com
+  description: Identification API (EU West region; other regions use identify-{region}.acrcloud.com)
+- url: https://api-v2.acrcloud.com
+  description: Console API and bucket/file/project management
+- url: https://eu-api-v2.acrcloud.com
+  description: External Metadata API (region-specific host)
+tags:
+- name: Buckets
+  description: Manage custom recognition buckets.
+paths:
+  /api/buckets:
+    get:
+      operationId: listBuckets
+      tags:
+      - Buckets
+      summary: List buckets.
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: region
+        in: query
+        schema:
+          type: string
+      - name: type
+        in: query
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Paginated list of buckets.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BucketList'
+    post:
+      operationId: createBucket
+      tags:
+      - Buckets
+      summary: Create a bucket.
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BucketCreate'
+      responses:
+        '201':
+          description: The created bucket.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bucket'
+  /api/buckets/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: getBucket
+      tags:
+      - Buckets
+      summary: Retrieve a bucket.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: The requested bucket.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bucket'
+    put:
+      operationId: updateBucket
+      tags:
+      - Buckets
+      summary: Update a bucket.
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BucketCreate'
+      responses:
+        '200':
+          description: The updated bucket.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bucket'
+    delete:
+      operationId: deleteBucket
+      tags:
+      - Buckets
+      summary: Delete a bucket (the bucket must be emptied first).
+      security:
+      - bearerAuth: []
+      responses:
+        '204':
+          description: Bucket deleted.
+components:
+  schemas:
+    Bucket:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        region:
+          type: string
+        type:
+          type: string
+        net_type:
+          type: integer
+        state:
+          type: integer
+        created_at:
+          type: string
+        updated_at:
+          type: string
+    BucketList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Bucket'
+        meta:
+          $ref: '#/components/schemas/PageMeta'
+    PageMeta:
+      type: object
+      properties:
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total:
+          type: integer
+    BucketCreate:
+      type: object
+      required:
+      - name
+      - region
+      properties:
+        name:
+          type: string
+        region:
+          type: string
+        type:
+          type: string
+        net_type:
+          type: integer
+        labels:
+          type: array
+          items:
+            type: string
+        metadata_template:
+          type: object
+  securitySchemes:
+    acrSignature:
+      type: apiKey
+      in: query
+      name: signature
+      description: HMAC-SHA1 request signing for the Identification API. The client sends access_key, timestamp, signature_version=1, data_type, and a Base64 signature. The signature is HMAC-SHA1 of the string "POST\n/v1/identify\n {access_key}\n{data_type}\n1\n{timestamp}" keyed with the access_secret.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Console API access token created in the ACRCloud console developer settings and sent as "Authorization: Bearer {token}".'
