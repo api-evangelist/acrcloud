@@ -1,0 +1,24 @@
+{
+  "provider": "acrcloud",
+  "sources": [
+    "acrcloud-audio-files-api-openapi.yml",
+    "acrcloud-broadcast-monitoring-api-openapi.yml",
+    "acrcloud-buckets-api-openapi.yml",
+    "acrcloud-file-scanning-api-openapi.yml",
+    "acrcloud-identification-api-openapi.yml",
+    "acrcloud-metadata-api-openapi.yml"
+  ],
+  "outputs": [
+    "acrcloud-audio-files-api-openapi.yml",
+    "acrcloud-broadcast-monitoring-api-openapi.yml",
+    "acrcloud-buckets-api-openapi.yml",
+    "acrcloud-file-scanning-api-openapi.yml",
+    "acrcloud-identification-api-openapi.yml",
+    "acrcloud-metadata-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
