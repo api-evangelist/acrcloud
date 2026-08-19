@@ -1,0 +1,144 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ACRCloud Audio Files Buckets API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Buckets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List buckets.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://identify-eu-west-1.acrcloud.com/api/buckets",
+            "params": [
+              {
+                "name": "region",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List buckets."
+        },
+        {
+          "info": {
+            "name": "Create a bucket.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://identify-eu-west-1.acrcloud.com/api/buckets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a bucket."
+        },
+        {
+          "info": {
+            "name": "Retrieve a bucket.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://identify-eu-west-1.acrcloud.com/api/buckets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve a bucket."
+        },
+        {
+          "info": {
+            "name": "Update a bucket.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://identify-eu-west-1.acrcloud.com/api/buckets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a bucket."
+        },
+        {
+          "info": {
+            "name": "Delete a bucket (the bucket must be emptied first).",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://identify-eu-west-1.acrcloud.com/api/buckets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a bucket (the bucket must be emptied first)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

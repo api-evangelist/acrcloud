@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ACRCloud Audio Files Identification API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Identification",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Identify music or custom audio from a sample or fingerprint.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://identify-eu-west-1.acrcloud.com/v1/identify",
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "signature",
+              "value": "{{signature}}",
+              "placement": "query"
+            }
+          },
+          "docs": "Submits a short audio sample (recommended under 15 seconds) or a precomputed fingerprint and returns matched track metadata. The request is authenticated with an HMAC-SHA1 signature computed from the access secret over a string built from the HTTP method, endpoint URI, access key, data type, signature version, and timestamp joined by newlines."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

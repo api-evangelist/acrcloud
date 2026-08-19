@@ -1,0 +1,242 @@
+{
+  "item": [
+    {
+      "id": "43bf3243-c771-4296-a257-3258df1e1554",
+      "name": "Identification",
+      "description": {
+        "content": "Recognize music, custom audio, and humming from a sample or fingerprint.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9d4c9d8f-e156-4968-974d-da1a2c907c14",
+          "name": "Identify music or custom audio from a sample or fingerprint.",
+          "request": {
+            "name": "Identify music or custom audio from a sample or fingerprint.",
+            "description": {
+              "content": "Submits a short audio sample (recommended under 15 seconds) or a precomputed fingerprint and returns matched track metadata. The request is authenticated with an HMAC-SHA1 signature computed from the access secret over a string built from the HTTP method, endpoint URI, access key, data type, signature version, and timestamp joined by newlines.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "identify"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "signature"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "query"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "access_key",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Project access key."
+                },
+                {
+                  "key": "data_type",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required)  (This can only be one of audio,fingerprint)"
+                },
+                {
+                  "key": "signature_version",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required)  (This can only be one of 1)"
+                },
+                {
+                  "key": "signature",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Base64-encoded HMAC-SHA1 signature."
+                },
+                {
+                  "key": "timestamp",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Unix epoch timestamp."
+                },
+                {
+                  "key": "sample",
+                  "type": "file",
+                  "description": "Audio or fingerprint payload (under 5MB)."
+                },
+                {
+                  "key": "sample_bytes",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "Size of the sample in bytes."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "000b9374-89fa-41d2-8a12-868e3b80c86c",
+              "name": "Identification result (a status code of 0 indicates success).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "identify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "signature",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Project access key.",
+                        "type": "text/plain"
+                      },
+                      "key": "access_key",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required)  (This can only be one of audio,fingerprint)",
+                        "type": "text/plain"
+                      },
+                      "key": "data_type",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required)  (This can only be one of 1)",
+                        "type": "text/plain"
+                      },
+                      "key": "signature_version",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Base64-encoded HMAC-SHA1 signature.",
+                        "type": "text/plain"
+                      },
+                      "key": "signature",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Unix epoch timestamp.",
+                        "type": "text/plain"
+                      },
+                      "key": "timestamp",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Audio or fingerprint payload (under 5MB).",
+                        "type": "text/plain"
+                      },
+                      "key": "sample",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Size of the sample in bytes.",
+                        "type": "text/plain"
+                      },
+                      "key": "sample_bytes",
+                      "value": "<integer>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"code\": 4219,\n    \"msg\": \"string\",\n    \"version\": \"string\"\n  },\n  \"result_type\": 5067,\n  \"metadata\": {\n    \"timestamp_utc\": \"string\",\n    \"music\": [\n      {\n        \"title\": \"string\",\n        \"acrid\": \"string\",\n        \"isrc\": \"string\",\n        \"duration_ms\": 3002,\n        \"score\": 4064,\n        \"release_date\": \"string\",\n        \"artists\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"album\": {\n          \"name\": \"string\"\n        },\n        \"external_ids\": {\n          \"isrc\": \"string\",\n          \"iswc\": \"string\",\n          \"upc\": \"string\"\n        },\n        \"genres\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ]\n      },\n      {\n        \"title\": \"string\",\n        \"acrid\": \"string\",\n        \"isrc\": \"string\",\n        \"duration_ms\": 5640,\n        \"score\": 2468,\n        \"release_date\": \"string\",\n        \"artists\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"album\": {\n          \"name\": \"string\"\n        },\n        \"external_ids\": {\n          \"isrc\": \"string\",\n          \"iswc\": \"string\",\n          \"upc\": \"string\"\n        },\n        \"genres\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://identify-eu-west-1.acrcloud.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "764aa33e-5b18-4677-b773-175ce7d661dc",
+    "name": "ACRCloud Audio Files Identification API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Specification of the ACRCloud automatic content recognition (ACR) APIs. The Identification API recognizes music, custom audio, live channels, and humming from a short audio sample or a precomputed fingerprint using HMAC-SHA1 signed requests. The Console API (api-v2.acrcloud.com) manages buckets, audio files, file-scanning containers, and broadcast-monitoring projects using bearer-token access tokens, and the external Metadata API enriches tracks with third-party music metadata.\n\nContact Support:\n Name: ACRCloud Support\n Email: support@acrcloud.com",
+      "type": "text/plain"
+    }
+  }
+}

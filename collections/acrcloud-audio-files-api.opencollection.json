@@ -1,0 +1,142 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ACRCloud Audio Files API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Audio Files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List audio files in a bucket.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://identify-eu-west-1.acrcloud.com/api/buckets/:bucket_id/files",
+            "params": [
+              {
+                "name": "bucket_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List audio files in a bucket."
+        },
+        {
+          "info": {
+            "name": "Upload an audio file or fingerprint to a bucket.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://identify-eu-west-1.acrcloud.com/api/buckets/:bucket_id/files",
+            "params": [
+              {
+                "name": "bucket_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Upload an audio file or fingerprint to a bucket."
+        },
+        {
+          "info": {
+            "name": "Retrieve one or more audio files by ID or ACR ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://identify-eu-west-1.acrcloud.com/api/buckets/:bucket_id/files/:ids",
+            "params": [
+              {
+                "name": "bucket_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "path",
+                "description": "Comma-separated file IDs or ACR IDs."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve one or more audio files by ID or ACR ID."
+        },
+        {
+          "info": {
+            "name": "Delete one or more audio files.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://identify-eu-west-1.acrcloud.com/api/buckets/:bucket_id/files/:ids",
+            "params": [
+              {
+                "name": "bucket_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "path",
+                "description": "Comma-separated file IDs or ACR IDs."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete one or more audio files."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

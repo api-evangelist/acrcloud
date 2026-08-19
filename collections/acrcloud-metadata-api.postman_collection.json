@@ -1,0 +1,188 @@
+{
+  "item": [
+    {
+      "id": "f897ec31-0fa9-498e-93a7-80519224e429",
+      "name": "Metadata",
+      "description": {
+        "content": "Look up enriched third-party music metadata.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "976c3d1a-fc5d-400a-a01e-b9b1a213465a",
+          "name": "Look up enriched track metadata.",
+          "request": {
+            "name": "Look up enriched track metadata.",
+            "description": {
+              "content": "Returns enriched music metadata for a track resolved by ISRC, ACR ID, source URL, or free-text query, including platform-specific external IDs and links across Spotify, Deezer, YouTube, and Apple Music.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "external-metadata",
+                "tracks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "isrc",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "acr_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "source_url",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "platforms",
+                  "value": "<string>",
+                  "description": "Comma-separated platforms (max 5). Default spotify,deezer,youtube,applemusic."
+                },
+                {
+                  "disabled": false,
+                  "key": "include_works",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "text"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8ea66a03-a440-456d-9c16-3b28422985b9",
+              "name": "Track metadata.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "external-metadata",
+                    "tracks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "isrc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "acr_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source_url",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "platforms",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_works",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "text"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"isrc\": \"string\",\n  \"duration_ms\": 8456,\n  \"release_date\": \"string\",\n  \"artists\": [\n    {\n      \"name\": \"string\"\n    },\n    {\n      \"name\": \"string\"\n    }\n  ],\n  \"album\": {\n    \"name\": \"string\",\n    \"upc\": \"string\",\n    \"label\": \"string\"\n  },\n  \"genres\": [\n    \"string\",\n    \"string\"\n  ],\n  \"external_metadata\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://identify-eu-west-1.acrcloud.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bb921d3d-e08e-465f-988a-3c3d5acd064d",
+    "name": "ACRCloud Audio Files Metadata API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Specification of the ACRCloud automatic content recognition (ACR) APIs. The Identification API recognizes music, custom audio, live channels, and humming from a short audio sample or a precomputed fingerprint using HMAC-SHA1 signed requests. The Console API (api-v2.acrcloud.com) manages buckets, audio files, file-scanning containers, and broadcast-monitoring projects using bearer-token access tokens, and the external Metadata API enriches tracks with third-party music metadata.\n\nContact Support:\n Name: ACRCloud Support\n Email: support@acrcloud.com",
+      "type": "text/plain"
+    }
+  }
+}

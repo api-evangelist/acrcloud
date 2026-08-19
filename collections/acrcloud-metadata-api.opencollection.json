@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ACRCloud Audio Files Metadata API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Look up enriched track metadata.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://identify-eu-west-1.acrcloud.com/api/external-metadata/tracks",
+            "params": [
+              {
+                "name": "isrc",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "acr_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "source_url",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "platforms",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated platforms (max 5). Default spotify,deezer,youtube,applemusic."
+              },
+              {
+                "name": "include_works",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns enriched music metadata for a track resolved by ISRC, ACR ID, source URL, or free-text query, including platform-specific external IDs and links across Spotify, Deezer, YouTube, and Apple Music."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
