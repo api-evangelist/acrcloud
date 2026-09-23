@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: ACRCloud Audio Files Identification API
+  title: ACRCloud Identification API
   description: Specification of the ACRCloud automatic content recognition (ACR) APIs. The Identification API recognizes music, custom audio, live channels, and humming from a short audio sample or a precomputed fingerprint using HMAC-SHA1 signed requests. The Console API (api-v2.acrcloud.com) manages buckets, audio files, file-scanning containers, and broadcast-monitoring projects using bearer-token access tokens, and the external Metadata API enriches tracks with third-party music metadata.
   termsOfService: https://www.acrcloud.com/terms/
   contact:
@@ -24,7 +24,7 @@ paths:
       operationId: identify
       tags:
       - Identification
-      summary: Identify music or custom audio from a sample or fingerprint.
+      summary: Identify music or custom audio from a sample or fingerprint
       description: Submits a short audio sample (recommended under 15 seconds) or a precomputed fingerprint and returns matched track metadata. The request is authenticated with an HMAC-SHA1 signature computed from the access secret over a string built from the HTTP method, endpoint URI, access key, data type, signature version, and timestamp joined by newlines.
       security:
       - acrSignature: []
@@ -86,34 +86,6 @@ components:
             properties:
               name:
                 type: string
-    IdentifyResponse:
-      type: object
-      properties:
-        status:
-          type: object
-          properties:
-            code:
-              type: integer
-              description: 0 indicates success.
-            msg:
-              type: string
-            version:
-              type: string
-        result_type:
-          type: integer
-        metadata:
-          type: object
-          properties:
-            timestamp_utc:
-              type: string
-            music:
-              type: array
-              items:
-                $ref: '#/components/schemas/MusicMatch'
-            custom_files:
-              type: array
-              items:
-                type: object
     IdentifyRequest:
       type: object
       required:
@@ -148,6 +120,34 @@ components:
         timestamp:
           type: string
           description: Unix epoch timestamp.
+    IdentifyResponse:
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            code:
+              type: integer
+              description: 0 indicates success.
+            msg:
+              type: string
+            version:
+              type: string
+        result_type:
+          type: integer
+        metadata:
+          type: object
+          properties:
+            timestamp_utc:
+              type: string
+            music:
+              type: array
+              items:
+                $ref: '#/components/schemas/MusicMatch'
+            custom_files:
+              type: array
+              items:
+                type: object
   securitySchemes:
     acrSignature:
       type: apiKey

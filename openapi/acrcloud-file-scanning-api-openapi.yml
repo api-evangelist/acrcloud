@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: ACRCloud Audio Files File Scanning API
+  title: ACRCloud File Scanning API
   description: Specification of the ACRCloud automatic content recognition (ACR) APIs. The Identification API recognizes music, custom audio, live channels, and humming from a short audio sample or a precomputed fingerprint using HMAC-SHA1 signed requests. The Console API (api-v2.acrcloud.com) manages buckets, audio files, file-scanning containers, and broadcast-monitoring projects using bearer-token access tokens, and the external Metadata API enriches tracks with third-party music metadata.
   termsOfService: https://www.acrcloud.com/terms/
   contact:
@@ -24,7 +24,7 @@ paths:
       operationId: listFileScanningContainers
       tags:
       - File Scanning
-      summary: List file-scanning containers.
+      summary: List file-scanning containers
       security:
       - bearerAuth: []
       parameters:
@@ -49,7 +49,7 @@ paths:
       operationId: createFileScanningContainer
       tags:
       - File Scanning
-      summary: Create a file-scanning container.
+      summary: Create a file-scanning container
       security:
       - bearerAuth: []
       requestBody:
@@ -76,7 +76,7 @@ paths:
       operationId: getFileScanningContainer
       tags:
       - File Scanning
-      summary: Retrieve a file-scanning container.
+      summary: Retrieve a file-scanning container
       security:
       - bearerAuth: []
       responses:
@@ -90,7 +90,7 @@ paths:
       operationId: updateFileScanningContainer
       tags:
       - File Scanning
-      summary: Update a file-scanning container.
+      summary: Update a file-scanning container
       security:
       - bearerAuth: []
       requestBody:
@@ -110,7 +110,7 @@ paths:
       operationId: deleteFileScanningContainer
       tags:
       - File Scanning
-      summary: Delete a file-scanning container.
+      summary: Delete a file-scanning container
       security:
       - bearerAuth: []
       responses:
@@ -118,21 +118,6 @@ paths:
           description: Container deleted.
 components:
   schemas:
-    FsContainer:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        region:
-          type: string
-        audio_type:
-          type: string
-        state:
-          type: integer
-        created_at:
-          type: string
     FsContainerCreate:
       type: object
       required:
@@ -162,6 +147,21 @@ components:
           type: integer
         ai_detection:
           type: integer
+    FsContainer:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        region:
+          type: string
+        audio_type:
+          type: string
+        state:
+          type: integer
+        created_at:
+          type: string
   securitySchemes:
     acrSignature:
       type: apiKey

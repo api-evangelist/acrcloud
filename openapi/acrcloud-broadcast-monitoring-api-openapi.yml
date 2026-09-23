@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: ACRCloud Audio Files Broadcast Monitoring API
+  title: ACRCloud Broadcast Monitoring API
   description: Specification of the ACRCloud automatic content recognition (ACR) APIs. The Identification API recognizes music, custom audio, live channels, and humming from a short audio sample or a precomputed fingerprint using HMAC-SHA1 signed requests. The Console API (api-v2.acrcloud.com) manages buckets, audio files, file-scanning containers, and broadcast-monitoring projects using bearer-token access tokens, and the external Metadata API enriches tracks with third-party music metadata.
   termsOfService: https://www.acrcloud.com/terms/
   contact:
@@ -24,7 +24,7 @@ paths:
       operationId: listBroadcastProjects
       tags:
       - Broadcast Monitoring
-      summary: List broadcast-database monitoring projects.
+      summary: List broadcast-database monitoring projects
       security:
       - bearerAuth: []
       parameters:
@@ -45,7 +45,7 @@ paths:
       operationId: createBroadcastProject
       tags:
       - Broadcast Monitoring
-      summary: Create a broadcast-database monitoring project.
+      summary: Create a broadcast-database monitoring project
       security:
       - bearerAuth: []
       requestBody:
@@ -72,7 +72,7 @@ paths:
       operationId: updateBroadcastProject
       tags:
       - Broadcast Monitoring
-      summary: Update a broadcast-monitoring project.
+      summary: Update a broadcast-monitoring project
       security:
       - bearerAuth: []
       requestBody:
@@ -92,7 +92,7 @@ paths:
       operationId: deleteBroadcastProject
       tags:
       - Broadcast Monitoring
-      summary: Delete a broadcast-monitoring project.
+      summary: Delete a broadcast-monitoring project
       security:
       - bearerAuth: []
       responses:
@@ -109,7 +109,7 @@ paths:
       operationId: setResultCallback
       tags:
       - Broadcast Monitoring
-      summary: Set the results callback URL for a broadcast-monitoring project.
+      summary: Set the results callback URL for a broadcast-monitoring project
       security:
       - bearerAuth: []
       requestBody:

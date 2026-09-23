@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: ACRCloud Audio Files Buckets API
+  title: ACRCloud Buckets API
   description: Specification of the ACRCloud automatic content recognition (ACR) APIs. The Identification API recognizes music, custom audio, live channels, and humming from a short audio sample or a precomputed fingerprint using HMAC-SHA1 signed requests. The Console API (api-v2.acrcloud.com) manages buckets, audio files, file-scanning containers, and broadcast-monitoring projects using bearer-token access tokens, and the external Metadata API enriches tracks with third-party music metadata.
   termsOfService: https://www.acrcloud.com/terms/
   contact:
@@ -24,7 +24,7 @@ paths:
       operationId: listBuckets
       tags:
       - Buckets
-      summary: List buckets.
+      summary: List buckets
       security:
       - bearerAuth: []
       parameters:
@@ -55,7 +55,7 @@ paths:
       operationId: createBucket
       tags:
       - Buckets
-      summary: Create a bucket.
+      summary: Create a bucket
       security:
       - bearerAuth: []
       requestBody:
@@ -82,7 +82,7 @@ paths:
       operationId: getBucket
       tags:
       - Buckets
-      summary: Retrieve a bucket.
+      summary: Retrieve a bucket
       security:
       - bearerAuth: []
       responses:
@@ -96,7 +96,7 @@ paths:
       operationId: updateBucket
       tags:
       - Buckets
-      summary: Update a bucket.
+      summary: Update a bucket
       security:
       - bearerAuth: []
       requestBody:
@@ -116,7 +116,7 @@ paths:
       operationId: deleteBucket
       tags:
       - Buckets
-      summary: Delete a bucket (the bucket must be emptied first).
+      summary: Delete a bucket (the bucket must be emptied first)
       security:
       - bearerAuth: []
       responses:
@@ -124,6 +124,15 @@ paths:
           description: Bucket deleted.
 components:
   schemas:
+    PageMeta:
+      type: object
+      properties:
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total:
+          type: integer
     Bucket:
       type: object
       properties:
@@ -143,24 +152,6 @@ components:
           type: string
         updated_at:
           type: string
-    BucketList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Bucket'
-        meta:
-          $ref: '#/components/schemas/PageMeta'
-    PageMeta:
-      type: object
-      properties:
-        page:
-          type: integer
-        per_page:
-          type: integer
-        total:
-          type: integer
     BucketCreate:
       type: object
       required:
@@ -181,6 +172,15 @@ components:
             type: string
         metadata_template:
           type: object
+    BucketList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Bucket'
+        meta:
+          $ref: '#/components/schemas/PageMeta'
   securitySchemes:
     acrSignature:
       type: apiKey

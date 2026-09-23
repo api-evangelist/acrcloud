@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: ACRCloud Audio Files API
   description: Specification of the ACRCloud automatic content recognition (ACR) APIs. The Identification API recognizes music, custom audio, live channels, and humming from a short audio sample or a precomputed fingerprint using HMAC-SHA1 signed requests. The Console API (api-v2.acrcloud.com) manages buckets, audio files, file-scanning containers, and broadcast-monitoring projects using bearer-token access tokens, and the external Metadata API enriches tracks with third-party music metadata.
@@ -30,7 +30,7 @@ paths:
       operationId: listAudioFiles
       tags:
       - Audio Files
-      summary: List audio files in a bucket.
+      summary: List audio files in a bucket
       security:
       - bearerAuth: []
       parameters:
@@ -61,7 +61,7 @@ paths:
       operationId: uploadAudioFile
       tags:
       - Audio Files
-      summary: Upload an audio file or fingerprint to a bucket.
+      summary: Upload an audio file or fingerprint to a bucket
       security:
       - bearerAuth: []
       requestBody:
@@ -94,7 +94,7 @@ paths:
       operationId: getAudioFiles
       tags:
       - Audio Files
-      summary: Retrieve one or more audio files by ID or ACR ID.
+      summary: Retrieve one or more audio files by ID or ACR ID
       security:
       - bearerAuth: []
       responses:
@@ -110,7 +110,7 @@ paths:
       operationId: deleteAudioFiles
       tags:
       - Audio Files
-      summary: Delete one or more audio files.
+      summary: Delete one or more audio files
       security:
       - bearerAuth: []
       responses:
@@ -118,6 +118,15 @@ paths:
           description: Files deleted.
 components:
   schemas:
+    PageMeta:
+      type: object
+      properties:
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total:
+          type: integer
     AudioFile:
       type: object
       properties:
@@ -139,6 +148,15 @@ components:
           type: string
         updated_at:
           type: string
+    AudioFileList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudioFile'
+        meta:
+          $ref: '#/components/schemas/PageMeta'
     AudioFileUpload:
       type: object
       required:
@@ -159,24 +177,6 @@ components:
         user_defined:
           type: string
           description: JSON-encoded user-defined metadata.
-    AudioFileList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudioFile'
-        meta:
-          $ref: '#/components/schemas/PageMeta'
-    PageMeta:
-      type: object
-      properties:
-        page:
-          type: integer
-        per_page:
-          type: integer
-        total:
-          type: integer
   securitySchemes:
     acrSignature:
       type: apiKey

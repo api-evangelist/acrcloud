@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: ACRCloud Audio Files Metadata API
+  title: ACRCloud Metadata API
   description: Specification of the ACRCloud automatic content recognition (ACR) APIs. The Identification API recognizes music, custom audio, live channels, and humming from a short audio sample or a precomputed fingerprint using HMAC-SHA1 signed requests. The Console API (api-v2.acrcloud.com) manages buckets, audio files, file-scanning containers, and broadcast-monitoring projects using bearer-token access tokens, and the external Metadata API enriches tracks with third-party music metadata.
   termsOfService: https://www.acrcloud.com/terms/
   contact:
@@ -24,7 +24,7 @@ paths:
       operationId: getExternalMetadataTracks
       tags:
       - Metadata
-      summary: Look up enriched track metadata.
+      summary: Look up enriched track metadata
       description: Returns enriched music metadata for a track resolved by ISRC, ACR ID, source URL, or free-text query, including platform-specific external IDs and links across Spotify, Deezer, YouTube, and Apple Music.
       security:
       - bearerAuth: []
