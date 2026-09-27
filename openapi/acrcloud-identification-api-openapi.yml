@@ -86,6 +86,34 @@ components:
             properties:
               name:
                 type: string
+    IdentifyResponse:
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            code:
+              type: integer
+              description: 0 indicates success.
+            msg:
+              type: string
+            version:
+              type: string
+        result_type:
+          type: integer
+        metadata:
+          type: object
+          properties:
+            timestamp_utc:
+              type: string
+            music:
+              type: array
+              items:
+                $ref: '#/components/schemas/MusicMatch'
+            custom_files:
+              type: array
+              items:
+                type: object
     IdentifyRequest:
       type: object
       required:
@@ -120,34 +148,6 @@ components:
         timestamp:
           type: string
           description: Unix epoch timestamp.
-    IdentifyResponse:
-      type: object
-      properties:
-        status:
-          type: object
-          properties:
-            code:
-              type: integer
-              description: 0 indicates success.
-            msg:
-              type: string
-            version:
-              type: string
-        result_type:
-          type: integer
-        metadata:
-          type: object
-          properties:
-            timestamp_utc:
-              type: string
-            music:
-              type: array
-              items:
-                $ref: '#/components/schemas/MusicMatch'
-            custom_files:
-              type: array
-              items:
-                type: object
   securitySchemes:
     acrSignature:
       type: apiKey

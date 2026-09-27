@@ -118,36 +118,6 @@ paths:
           description: Files deleted.
 components:
   schemas:
-    PageMeta:
-      type: object
-      properties:
-        page:
-          type: integer
-        per_page:
-          type: integer
-        total:
-          type: integer
-    AudioFile:
-      type: object
-      properties:
-        id:
-          type: string
-        acr_id:
-          type: string
-        bucket_id:
-          type: string
-        title:
-          type: string
-        state:
-          type: integer
-        duration:
-          type: number
-        user_defined:
-          type: object
-        created_at:
-          type: string
-        updated_at:
-          type: string
     AudioFileList:
       type: object
       properties:
@@ -177,6 +147,36 @@ components:
         user_defined:
           type: string
           description: JSON-encoded user-defined metadata.
+    AudioFile:
+      type: object
+      properties:
+        id:
+          type: string
+        acr_id:
+          type: string
+        bucket_id:
+          type: string
+        title:
+          type: string
+        state:
+          type: integer
+        duration:
+          type: number
+        user_defined:
+          type: object
+        created_at:
+          type: string
+        updated_at:
+          type: string
+    PageMeta:
+      type: object
+      properties:
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total:
+          type: integer
   securitySchemes:
     acrSignature:
       type: apiKey

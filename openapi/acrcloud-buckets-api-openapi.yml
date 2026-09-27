@@ -133,25 +133,6 @@ components:
           type: integer
         total:
           type: integer
-    Bucket:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        region:
-          type: string
-        type:
-          type: string
-        net_type:
-          type: integer
-        state:
-          type: integer
-        created_at:
-          type: string
-        updated_at:
-          type: string
     BucketCreate:
       type: object
       required:
@@ -172,6 +153,25 @@ components:
             type: string
         metadata_template:
           type: object
+    Bucket:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        region:
+          type: string
+        type:
+          type: string
+        net_type:
+          type: integer
+        state:
+          type: integer
+        created_at:
+          type: string
+        updated_at:
+          type: string
     BucketList:
       type: object
       properties:
