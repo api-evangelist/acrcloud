@@ -43,49 +43,6 @@ paths:
                 $ref: '#/components/schemas/IdentifyResponse'
 components:
   schemas:
-    MusicMatch:
-      type: object
-      properties:
-        title:
-          type: string
-        acrid:
-          type: string
-        isrc:
-          type: string
-        duration_ms:
-          type: integer
-        score:
-          type: integer
-        release_date:
-          type: string
-        artists:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-        album:
-          type: object
-          properties:
-            name:
-              type: string
-        external_ids:
-          type: object
-          properties:
-            isrc:
-              type: string
-            iswc:
-              type: string
-            upc:
-              type: string
-        genres:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
     IdentifyResponse:
       type: object
       properties:
@@ -148,6 +105,49 @@ components:
         timestamp:
           type: string
           description: Unix epoch timestamp.
+    MusicMatch:
+      type: object
+      properties:
+        title:
+          type: string
+        acrid:
+          type: string
+        isrc:
+          type: string
+        duration_ms:
+          type: integer
+        score:
+          type: integer
+        release_date:
+          type: string
+        artists:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+        album:
+          type: object
+          properties:
+            name:
+              type: string
+        external_ids:
+          type: object
+          properties:
+            isrc:
+              type: string
+            iswc:
+              type: string
+            upc:
+              type: string
+        genres:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
   securitySchemes:
     acrSignature:
       type: apiKey
