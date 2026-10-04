@@ -118,6 +118,21 @@ paths:
           description: Container deleted.
 components:
   schemas:
+    FsContainer:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        region:
+          type: string
+        audio_type:
+          type: string
+        state:
+          type: integer
+        created_at:
+          type: string
     FsContainerCreate:
       type: object
       required:
@@ -147,21 +162,6 @@ components:
           type: integer
         ai_detection:
           type: integer
-    FsContainer:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        region:
-          type: string
-        audio_type:
-          type: string
-        state:
-          type: integer
-        created_at:
-          type: string
   securitySchemes:
     acrSignature:
       type: apiKey

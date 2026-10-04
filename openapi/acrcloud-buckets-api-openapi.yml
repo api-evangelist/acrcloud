@@ -124,6 +124,25 @@ paths:
           description: Bucket deleted.
 components:
   schemas:
+    Bucket:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        region:
+          type: string
+        type:
+          type: string
+        net_type:
+          type: integer
+        state:
+          type: integer
+        created_at:
+          type: string
+        updated_at:
+          type: string
     BucketCreate:
       type: object
       required:
@@ -162,25 +181,6 @@ components:
             $ref: '#/components/schemas/Bucket'
         meta:
           $ref: '#/components/schemas/PageMeta'
-    Bucket:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        region:
-          type: string
-        type:
-          type: string
-        net_type:
-          type: integer
-        state:
-          type: integer
-        created_at:
-          type: string
-        updated_at:
-          type: string
   securitySchemes:
     acrSignature:
       type: apiKey

@@ -118,44 +118,6 @@ paths:
           description: Files deleted.
 components:
   schemas:
-    PageMeta:
-      type: object
-      properties:
-        page:
-          type: integer
-        per_page:
-          type: integer
-        total:
-          type: integer
-    AudioFileList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudioFile'
-        meta:
-          $ref: '#/components/schemas/PageMeta'
-    AudioFileUpload:
-      type: object
-      required:
-      - data_type
-      properties:
-        file:
-          type: string
-          format: binary
-        title:
-          type: string
-        data_type:
-          type: string
-          enum:
-          - audio
-          - fingerprint
-          - audio_url
-          - acrid
-        user_defined:
-          type: string
-          description: JSON-encoded user-defined metadata.
     AudioFile:
       type: object
       properties:
@@ -177,6 +139,44 @@ components:
           type: string
         updated_at:
           type: string
+    AudioFileUpload:
+      type: object
+      required:
+      - data_type
+      properties:
+        file:
+          type: string
+          format: binary
+        title:
+          type: string
+        data_type:
+          type: string
+          enum:
+          - audio
+          - fingerprint
+          - audio_url
+          - acrid
+        user_defined:
+          type: string
+          description: JSON-encoded user-defined metadata.
+    AudioFileList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudioFile'
+        meta:
+          $ref: '#/components/schemas/PageMeta'
+    PageMeta:
+      type: object
+      properties:
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total:
+          type: integer
   securitySchemes:
     acrSignature:
       type: apiKey
