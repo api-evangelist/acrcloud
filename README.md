@@ -1,4 +1,4 @@
-# ACRCloud (acrcloud)
+# ACRCloud
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,137 +66,126 @@
 
 ACRCloud provides automatic content recognition (ACR) APIs for music and audio. The HMAC-signed Identification API recognizes music, custom audio, live channels, and humming from short audio samples or fingerprints, while the bearer-token Console and Metadata APIs manage buckets, file-scanning containers, broadcast-monitoring projects, and rich third-party music metadata.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/acrcloud/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/acrcloud/refs/heads/main/apis.yml)
+**Areas:** Audio · Music Recognition · Audio Fingerprinting · Broadcast Monitoring · Metadata · Music
 
-## Tags
+## ACRCloud on APIs.io
 
-- Audio
-- Music Recognition
-- Audio Fingerprinting
-- Broadcast Monitoring
-- Metadata
+Everything profiled for ACRCloud is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/acrcloud/](https://apis.io/providers/acrcloud/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (6)
 
-- **Created:** 2026-06-21
-- **Modified:** 2026-06-21
+- [ACRCloud Audio Files API](https://apis.io/apis/acrcloud/acrcloud-audio-files-api/) — Upload and manage audio files and fingerprints within a bucket.
+- [ACRCloud Broadcast Monitoring API](https://apis.io/apis/acrcloud/acrcloud-broadcast-monitoring-api/) — Manage broadcast-database monitoring projects and result callbacks.
+- [ACRCloud Buckets API](https://apis.io/apis/acrcloud/acrcloud-buckets-api/) — Manage custom recognition buckets.
+- [ACRCloud File Scanning API](https://apis.io/apis/acrcloud/acrcloud-file-scanning-api/) — Manage file-scanning containers that detect content from buckets.
+- [ACRCloud Identification API](https://apis.io/apis/acrcloud/acrcloud-identification-api/) — Recognize music, custom audio, and humming from a sample or fingerprint.
+- [ACRCloud Metadata API](https://apis.io/apis/acrcloud/acrcloud-metadata-api/) — Look up enriched third-party music metadata.
 
-## APIs
+### Published properties
 
-### ACRCloud Identification API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-HMAC-SHA1 signed recognition endpoint that identifies music, custom audio, live channels, humming, and music/speech segments from a short audio sample or a precomputed fingerprint, returning matched track metadata.
+#### Agentic access (1)
 
-- **Human URL:** [https://docs.acrcloud.com/reference/identification-api](https://docs.acrcloud.com/reference/identification-api)
-- **Base URL:** `https://identify-eu-west-1.acrcloud.com/v1`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Acrcloud Agentic Access](https://apis.io/agentic-access/acrcloud/acrcloud-agentic-access/)
 
-- Identification
-- Music Recognition
-- Audio Fingerprinting
+#### Collections (7)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://docs.acrcloud.com/reference/identification-api)
-- [API Reference](https://docs.acrcloud.com/reference/identification-api/identification-api)
-- [OpenAPI](openapi/acrcloud-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/acrcloud.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/acrcloud.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [ACRCloud API](https://apis.io/collections/acrcloud/open-acrcloud/)
+- [ACRCloud Audio Files API](https://apis.io/collections/acrcloud/open-acrcloud-audio-files-api/)
+- [ACRCloud Audio Files Broadcast Monitoring API](https://apis.io/collections/acrcloud/open-acrcloud-broadcast-monitoring-api/)
+- [ACRCloud Audio Files Buckets API](https://apis.io/collections/acrcloud/open-acrcloud-buckets-api/)
+- [ACRCloud Audio Files File Scanning API](https://apis.io/collections/acrcloud/open-acrcloud-file-scanning-api/)
+- [ACRCloud Audio Files Identification API](https://apis.io/collections/acrcloud/open-acrcloud-identification-api/)
+- [ACRCloud Audio Files Metadata API](https://apis.io/collections/acrcloud/open-acrcloud-metadata-api/)
 
-### ACRCloud File Scanning API
+#### Security (2)
 
-Bearer-token managed file-scanning containers that detect recognized content from configured buckets across whole files, supporting both clean line-in audio and recorded/noisy audio.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://docs.acrcloud.com/reference/console-api/file-scanning](https://docs.acrcloud.com/reference/console-api/file-scanning)
-- **Base URL:** `https://api-v2.acrcloud.com/api`
+- [Acrcloud Authentication](https://apis.io/security/acrcloud/acrcloud-authentication/)
+- [Acrcloud Domain Security](https://apis.io/security/acrcloud/acrcloud-domain-security/)
 
-#### Tags
+#### Plans and pricing (1)
 
-- File Scanning
-- Content Detection
-- Buckets
+Published plans, tiers and prices.
 
-#### Properties
+- [Acrcloud Plans Pricing](https://apis.io/plans/acrcloud/acrcloud-plans-pricing/)
 
-- [Documentation](https://docs.acrcloud.com/reference/console-api/file-scanning)
-- [OpenAPI](openapi/acrcloud-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/acrcloud.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/acrcloud.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Rate limits (1)
 
-### ACRCloud Broadcast Monitoring API
+Published request limits.
 
-Broadcast-monitoring projects that continuously identify content across radio, TV, and custom streams, with channel management and realtime or delayed result callbacks.
+- [Acrcloud Rate Limits](https://apis.io/rate-limits/acrcloud/acrcloud-rate-limits/)
 
-- **Human URL:** [https://docs.acrcloud.com/reference/console-api/bm-projects/broadcast-database-projects](https://docs.acrcloud.com/reference/console-api/bm-projects/broadcast-database-projects)
-- **Base URL:** `https://api-v2.acrcloud.com/api`
+#### FinOps (1)
 
-#### Tags
+What the API costs to run, by operation.
 
-- Broadcast Monitoring
-- Channels
-- Realtime
+- [Acrcloud Finops](https://apis.io/finops/acrcloud/acrcloud-finops/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://docs.acrcloud.com/reference/console-api/bm-projects/broadcast-database-projects)
-- [OpenAPI](openapi/acrcloud-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/acrcloud.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/acrcloud.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### ACRCloud Buckets & Metadata API
-
-Manage custom recognition buckets, upload and manage audio files and fingerprints, and enrich tracks via the external Metadata API by ISRC, ACRID, source URL, or free-text query across Spotify, Deezer, YouTube, and Apple Music.
-
-- **Human URL:** [https://docs.acrcloud.com/reference/console-api/buckets](https://docs.acrcloud.com/reference/console-api/buckets)
-- **Base URL:** `https://api-v2.acrcloud.com/api`
-
-#### Tags
-
-- Buckets
-- Audio Files
-- Metadata
-
-#### Properties
-
-- [Documentation](https://docs.acrcloud.com/reference/console-api/buckets)
-- [API Reference](https://docs.acrcloud.com/reference/metadata-api)
-- [OpenAPI](openapi/acrcloud-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/acrcloud.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/acrcloud.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### ACRCloud Console API
-
-Bearer-token administrative API for managing projects, base/UCF projects, access keys, and the developer access tokens used to authenticate the Console, file-scanning, and broadcast-monitoring resources.
-
-- **Human URL:** [https://docs.acrcloud.com/reference/console-api](https://docs.acrcloud.com/reference/console-api)
-- **Base URL:** `https://api-v2.acrcloud.com/api`
-
-#### Tags
-
-- Console
-- Projects
-- Access Tokens
-
-#### Properties
-
-- [Documentation](https://docs.acrcloud.com/reference/console-api)
-- [API Reference](https://docs.acrcloud.com/reference/console-api/accesstoken)
-- [OpenAPI](openapi/acrcloud-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/acrcloud.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/acrcloud.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/acrcloud)
-- [LinkedIn](https://www.linkedin.com/company/acrcloud)
 - [Website](https://www.acrcloud.com)
 - [Documentation](https://docs.acrcloud.com)
-- [Plans](plans/acrcloud-plans-pricing.yml)
-- [Rate Limits](rate-limits/acrcloud-rate-limits.yml)
-- [Fin Ops](finops/acrcloud-finops.yml)
+- [Blog](https://acrcloud.com/blog)
+- [GitHub](https://github.com/acrcloud)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 26.3** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 46.9 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 31.0 |
+| Access clarity | 7.9 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 11.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/acrcloud/](https://apis.io/providers/acrcloud/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for ACRCloud: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/acrcloud/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
